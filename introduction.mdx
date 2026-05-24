@@ -1,0 +1,72 @@
+---
+title: "NZOChain: Stop Web3 Security Threats Before They Strike"
+description: "NZOChain monitors your wallets, detects malicious contracts and dangerous approvals in real time, stopping threats before assets are lost."
+sidebarTitle: "Introduction"
+---
+
+Every day, Web3 users lose assets not because of brute-force attacks, but because they unknowingly sign dangerous permissions or interact with contracts designed to drain their wallets. By the time most users notice something is wrong, the damage is done. NZOChain monitors your wallets in real time, analyzing every approval, contract interaction, and wallet connection to surface threats before you sign anything harmful.
+
+<Note>
+  NZOChain is read-only. It never accesses your funds, private keys, or seed phrases. Monitoring your wallet requires only your public address.
+</Note>
+
+## What NZOChain protects you from
+
+The most common Web3 threats don't look dangerous at first glance. A token approval buried in a transaction, a contract that looks legitimate, a dApp URL that's one character off — these are the attack vectors that cause real financial loss. NZOChain is built to catch exactly these threats.
+
+**Infinite approvals** give a smart contract unlimited access to your tokens. Many legitimate dApps request them for convenience, but malicious contracts exploit them to drain your wallet long after you've forgotten you signed. NZOChain flags every infinite approval and lets you revoke them with one click.
+
+**Malicious contracts** embed hidden logic — honeypots, fake tokens, and rug-pull mechanisms — that look benign on the surface. NZOChain analyzes smart contract bytecode to identify these patterns before you interact with them.
+
+**Phishing dApps** mimic real protocols with near-identical URLs and interfaces. When you connect your wallet to one, you may be prompted to sign a transaction that grants full access to your assets. NZOChain cross-references dApp signatures and domains against known phishing databases.
+
+**Silent theft via wallet drainers** uses a single malicious signature to transfer all your assets immediately. These attacks often masquerade as NFT mints, airdrops, or token claims. NZOChain simulates transactions before you sign and alerts you if an outgoing transfer is hidden inside.
+
+## Four pillars of protection
+
+<CardGroup cols={2}>
+  <Card title="Real-time threat monitoring" icon="shield-halved">
+    NZOChain watches your wallet continuously — not just at scan time. New approvals, contract interactions, and connection events are analyzed as they happen across all your connected wallets.
+  </Card>
+  <Card title="RiskScore™ analysis" icon="gauge-high">
+    Every wallet and transaction receives a RiskScore from 0 to 100, powered by on-chain data and AI pattern matching. Scores are labeled Safe, Warning, High Risk, or Critical so you always know your exposure level.
+  </Card>
+  <Card title="Smart permission revocation" icon="ban">
+    When NZOChain flags a dangerous approval or permission, you can revoke it instantly from your dashboard — no need to visit a third-party tool or construct a manual transaction.
+  </Card>
+  <Card title="Transaction simulation" icon="flask">
+    Before you sign anything, NZOChain simulates the transaction and shows you exactly what will happen: which tokens move, which approvals are granted, and whether any hidden actions are embedded.
+  </Card>
+</CardGroup>
+
+## Supported blockchains and wallets
+
+NZOChain supports **30+ blockchains**, including Ethereum, Solana, Polygon, BNB Chain, Arbitrum, and Base. You can connect using MetaMask, WalletConnect, Phantom, Trust Wallet, Coinbase Wallet, and other major wallet providers. Coverage expands continuously — see [Supported Networks](/networks/overview) for the full list.
+
+## By the numbers
+
+| Metric | Value |
+|---|---|
+| Approvals analyzed | 2M+ |
+| Wallets monitored | 150K+ |
+| Supported blockchains | 30+ |
+| Platform uptime | 99.99% |
+
+## Ready to get started?
+
+Connect your wallet and receive your first RiskScore in under five minutes.
+
+<CardGroup cols={2}>
+  <Card title="Quick start" icon="rocket" href="/quickstart">
+    Connect your wallet and run your first scan.
+  </Card>
+  <Card title="How it works" icon="diagram-project" href="/how-it-works">
+    Understand the detection pipeline behind your RiskScore.
+  </Card>
+  <Card title="RiskScore explained" icon="gauge-high" href="/features/risk-score">
+    Learn how your score is calculated and what each level means.
+  </Card>
+  <Card title="API reference" icon="code" href="/api/overview">
+    Integrate NZOChain security into your own application.
+  </Card>
+</CardGroup>

@@ -1,0 +1,82 @@
+---
+title: "Real-Time Wallet Monitoring Across Blockchains"
+description: "NZOChain continuously monitors your connected wallets across 30+ blockchains, alerting you the moment suspicious activity is detected."
+sidebarTitle: "Wallet Monitoring"
+---
+
+NZOChain's wallet monitoring runs continuously in the background — it is not a one-time scan you trigger manually. Once you add a wallet address, NZOChain starts watching every on-chain event associated with that address across all supported blockchains simultaneously. The moment something suspicious happens, you receive an alert through your chosen channel.
+
+## Alert channels
+
+Different plans unlock additional alert channels. Choose the ones that fit how you work.
+
+| Channel | Available on | Notes |
+|---------|-------------|-------|
+| Email | Free, Pro, Premium | Alerts sent to your registered email address |
+| Push notifications | Pro, Premium | Browser and mobile push alerts |
+| Telegram | Pro, Premium | Alerts sent directly to your Telegram account |
+
+<Tip>
+  Connect your Telegram account for the fastest possible response time. Telegram alerts arrive within seconds of a threat being detected, while email delivery can take up to a few minutes depending on your mail provider. Set up Telegram under **Settings → Notifications → Telegram**.
+</Tip>
+
+## How to add and manage monitored wallets
+
+The number of wallets you can monitor depends on your plan:
+
+- **Free**: 1 wallet
+- **Pro**: Up to 3 wallets
+- **Premium**: Unlimited wallets
+
+<Steps>
+  <Step title="Open your dashboard">
+    Log in to NZOChain and navigate to **Wallets** in the left sidebar.
+  </Step>
+  <Step title="Add a wallet">
+    Click **Add Wallet**, then paste the wallet address you want to monitor. You can add any public address — you do not need to connect it with a wallet extension to monitor it.
+  </Step>
+  <Step title="Select chains to monitor">
+    By default, NZOChain monitors the wallet across all supported chains. You can narrow monitoring to specific chains if preferred.
+  </Step>
+  <Step title="Configure alert preferences">
+    Choose which alert types trigger notifications for this wallet. You can configure alert sensitivity per wallet under **Wallet Settings → Alerts**.
+  </Step>
+  <Step title="Save and confirm">
+    Click **Start Monitoring**. NZOChain begins scanning immediately and will notify you of any existing risk signals within the first scan cycle.
+  </Step>
+</Steps>
+
+## Alert types
+
+NZOChain generates targeted alerts so you know exactly what triggered a notification and what to do next.
+
+<CardGroup cols={2}>
+  <Card title="New approval detected" icon="eye">
+    Fires when a contract receives a new token approval from your wallet. Includes the contract address, token, and approval amount.
+  </Card>
+  <Card title="High-risk contract interaction" icon="triangle-exclamation">
+    Fires when your wallet interacts with a contract flagged as malicious, unverified, or linked to known exploits.
+  </Card>
+  <Card title="Phishing attempt blocked" icon="shield">
+    Fires when NZOChain identifies a transaction or signature request originating from a known phishing domain or fake dApp.
+  </Card>
+  <Card title="Unusual activity pattern" icon="chart-line">
+    Fires when behavioral anomalies are detected — such as rapid sequential approvals or interactions with newly deployed contracts.
+  </Card>
+</CardGroup>
+
+## Cross-chain monitoring
+
+When you add a wallet, NZOChain monitors it across all 30+ supported blockchains at the same time. You do not need to add the same address separately for each chain. Activity on Ethereum, Solana, Polygon, BNB Chain, Arbitrum, Base, and all other supported networks is tracked under a single wallet entry.
+
+Each alert clearly identifies which chain the event occurred on, so you always have the full context.
+
+## Monitoring frequency
+
+NZOChain operates as a real-time monitoring system, not a scheduled scanner. Threat detection is event-driven — NZOChain watches the mempool and on-chain activity as it happens rather than polling at fixed intervals. This means:
+
+- Approval alerts fire at the moment the transaction is confirmed
+- Phishing warnings appear before you complete a transaction when possible
+- RiskScore™ updates immediately after any relevant on-chain event
+
+There is no minimum polling interval and no delay introduced by the monitoring system itself.

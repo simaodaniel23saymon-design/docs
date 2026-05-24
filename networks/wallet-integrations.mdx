@@ -1,0 +1,50 @@
+---
+title: "Supported Wallets and Connection Methods"
+description: "Connect MetaMask, WalletConnect, Phantom, Trust Wallet, or Coinbase Wallet to NZOChain for real-time protection at the exact signing moment."
+sidebarTitle: "Wallet Integrations"
+---
+
+NZOChain integrates with the most widely used Web3 wallets so you can activate threat protection without changing how you transact. Your existing wallet stays in place — NZOChain connects alongside it to monitor your activity and alert you when a transaction carries risk.
+
+## Supported wallets
+
+| Wallet | Type | Chains | Connection method |
+|--------|------|--------|------------------|
+| MetaMask | Browser extension | EVM chains | Direct |
+| WalletConnect | Protocol | Multi-chain | QR code / deep link |
+| Phantom | Browser extension | Solana | Direct |
+| Trust Wallet | Mobile | Multi-chain | WalletConnect |
+| Coinbase Wallet | Browser / Mobile | Multi-chain | WalletConnect |
+
+MetaMask and Phantom use direct browser extension connections, which allows NZOChain to intercept and analyze transactions at the moment they are submitted — before you confirm them. WalletConnect-based wallets (Trust Wallet, Coinbase Wallet) connect via QR code scan or deep link and receive the same real-time analysis through NZOChain's WalletConnect integration layer.
+
+## How to connect your wallet
+
+<Steps>
+  <Step title="Open the NZOChain dashboard">
+    Go to your NZOChain dashboard and click **Connect Wallet** in the top navigation bar.
+  </Step>
+  <Step title="Select your wallet">
+    Choose your wallet from the list of supported providers. If you use a mobile wallet, select WalletConnect to generate a QR code.
+  </Step>
+  <Step title="Approve the read-only connection">
+    Your wallet will prompt you to approve the connection. NZOChain only requests read access — no signing permission is requested or required.
+  </Step>
+  <Step title="Protection activates automatically">
+    Once connected, NZOChain begins scanning your wallet's activity, approvals, and contract interactions. Your RiskScore™ loads within seconds.
+  </Step>
+</Steps>
+
+## Privacy and read-only access
+
+NZOChain's connection to your wallet is strictly read-only. When you connect, NZOChain reads your on-chain history, active approvals, and contract interactions — it never requests the ability to sign transactions, move funds, or access your private key or seed phrase.
+
+Your private key and seed phrase never leave your wallet. NZOChain does not store them, request them, or have any mechanism to access them. If any service claiming to be NZOChain asks for your seed phrase, do not provide it.
+
+<Warning>
+  NZOChain will never ask you to enter your seed phrase or sign a transaction during the connection process. Any prompt requesting this is a phishing attempt — disconnect immediately and report it.
+</Warning>
+
+<Note>
+  NZOChain protection activates at the exact moment you're about to sign a transaction. When you initiate a transaction in your wallet, NZOChain analyzes the destination contract, approval scope, and risk signals in real time — and alerts you before you confirm, so you can review or cancel before any action is taken on-chain.
+</Note>

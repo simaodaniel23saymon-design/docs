@@ -1,0 +1,86 @@
+---
+title: "Smart Contract Analysis and Malicious Token Detection"
+description: "NZOChain analyzes smart contracts and tokens for hidden risks, flagging malicious bytecode, rug-pull patterns, and fake token signatures."
+sidebarTitle: "Contract Analysis"
+---
+
+Before you interact with a smart contract or token, NZOChain inspects it for risk signals that are invisible to the average user. Contract analysis goes beyond checking whether an address is on a known blocklist — it examines the bytecode, ownership structure, and embedded logic to surface hidden dangers like mint backdoors, locked liquidity traps, and proxy upgrade patterns that can drain your funds without warning.
+
+<Note>
+  Contract analysis results are informational and reflect NZOChain's assessment at the time of the scan. Always conduct your own research before signing transactions or committing capital. No automated system can guarantee that a contract is safe.
+</Note>
+
+## What contract analysis checks
+
+NZOChain's engine inspects every contract across several dimensions simultaneously.
+
+### Bytecode and code quality
+
+- **Bytecode inspection**: The raw compiled code is analyzed for known malicious patterns, obfuscation techniques, and structures associated with exploits.
+- **Proxy contracts**: Upgradeable proxy patterns are flagged because the implementation contract can be swapped by the owner after deployment, changing behavior without warning.
+- **Hidden minting functions**: Functions that allow the contract owner to mint unlimited tokens — or mint tokens directly to themselves — are identified and flagged.
+- **Self-destruct capabilities**: Contracts containing `selfdestruct` or equivalent instructions can wipe out contract funds; NZOChain flags these regardless of stated intent.
+
+### Ownership and control
+
+- **Ownership concentration**: If a single address controls the contract or holds a dominant share of the token supply, NZOChain surfaces this as a centralization risk.
+- **Ownership renouncement**: Contracts where ownership has been renounced are noted positively; contracts with mutable ownership or multi-sig overrides are flagged for review.
+- **Blacklist and whitelist logic**: Transfer restriction functions that let an owner block specific addresses from transacting are identified and marked as elevated risk.
+
+## Token analysis
+
+Token contracts receive additional checks on top of standard contract analysis.
+
+<CardGroup cols={2}>
+  <Card title="Liquidity lock status" icon="lock">
+    NZOChain checks whether the token's liquidity pool is locked and for how long. Unlocked liquidity means the deployer can remove funds at any time.
+  </Card>
+  <Card title="Ownership concentration" icon="users">
+    Tokens where a small number of wallets hold a large percentage of supply carry higher rug-pull risk. NZOChain reports top holder distribution.
+  </Card>
+  <Card title="Transfer restrictions" icon="ban">
+    Some tokens include hidden fees, maximum transaction limits, or transfer pause functions that can freeze your holdings unexpectedly.
+  </Card>
+  <Card title="Honeypot detection" icon="jar">
+    NZOChain simulates buy and sell transactions to detect honeypot contracts where you can buy but cannot sell.
+  </Card>
+</CardGroup>
+
+## Fake dApp detection
+
+Phishing dApps impersonate legitimate protocols to trick you into approving malicious contracts. NZOChain cross-references three signals to detect them:
+
+- **Domain reputation**: The domain is checked against NZOChain's database of known phishing sites and newly registered lookalike domains.
+- **Contract address mismatch**: If a dApp presents a contract address that differs from the verified contract used by the legitimate protocol, NZOChain surfaces a mismatch warning.
+- **Phishing signatures**: Known phishing contract bytecode signatures and approval patterns are matched against the contracts a dApp asks you to interact with.
+
+## How to manually scan a contract
+
+You can scan any contract or token address directly from your NZOChain dashboard without needing to interact with it first.
+
+<Steps>
+  <Step title="Navigate to Contract Scanner">
+    In your NZOChain dashboard, click **Analyze** in the left sidebar, then select **Contract Scanner**.
+  </Step>
+  <Step title="Paste the contract address">
+    Enter the contract address you want to analyze. Select the blockchain the contract is deployed on from the chain selector.
+  </Step>
+  <Step title="Run the analysis">
+    Click **Analyze Contract**. The scan typically completes within 10–30 seconds depending on contract complexity.
+  </Step>
+  <Step title="Review the results">
+    NZOChain returns a breakdown of all detected risk signals, organized by severity. Each signal includes an explanation of what was found and why it matters.
+  </Step>
+</Steps>
+
+## Risk signal reference
+
+Every detected issue is assigned one of three severity levels.
+
+| Signal level | Meaning | Example signals |
+|-------------|---------|-----------------|
+| **HIGH** | Critical risk — strongly reconsider interaction | Malicious bytecode match, honeypot confirmed, hidden mint function, proxy with mutable implementation |
+| **MEDIUM** | Elevated risk — proceed only after research | Unlocked liquidity, high ownership concentration, blacklist/whitelist functions present, unverified source code |
+| **LOW** | Informational — worth knowing, not necessarily dangerous | Ownership not renounced, contract is less than 30 days old, low transaction volume |
+
+A contract can return multiple signals at different levels. The overall risk rating shown in your dashboard reflects the highest severity signal detected.

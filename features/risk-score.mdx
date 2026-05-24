@@ -1,0 +1,74 @@
+---
+title: "RiskScore™: AI-Powered Wallet Threat Scoring"
+description: "NZOChain's RiskScore™ assigns a 0–100 threat level to your wallet based on approvals, contracts, and activity patterns. Learn what each score means."
+sidebarTitle: "RiskScore™"
+---
+
+Your RiskScore™ is a live, composite number between 0 and 100 that reflects the current threat exposure of your wallet. Unlike a one-time security check, the score updates continuously as NZOChain detects new approvals, contract interactions, and behavioral signals. A lower score means your wallet is clean; a higher score means action is needed.
+
+## Score bands and what they mean
+
+NZOChain maps every score to one of four bands, each with a clear recommended response.
+
+| Score | Band | Status | Recommended action |
+|-------|------|--------|--------------------|
+| 0–30 | Safe | No significant threats detected | No action required — review periodically |
+| 31–60 | Warning | Suspicious signals present | Review flagged approvals and contract interactions |
+| 61–85 | High Risk | Dangerous approvals or contracts detected | Revoke risky permissions immediately |
+| 86–100 | Critical | Active threats requiring immediate action | Act now — revoke all dangerous approvals and disconnect from suspicious dApps |
+
+<Warning>
+  A Critical score (86–100) means NZOChain has detected active threats against your wallet. Do not sign any new transactions until you have reviewed and resolved the flagged issues. Go to your **Approval Manager** and revoke dangerous permissions immediately.
+</Warning>
+
+## What contributes to your score
+
+Your RiskScore™ is calculated from multiple threat signals simultaneously. NZOChain weighs each factor based on severity and combines them into a single score.
+
+<CardGroup cols={2}>
+  <Card title="Active approvals" icon="key">
+    Unlimited or high-value token approvals granted to external contracts. The more uncapped approvals you have, the higher your score.
+  </Card>
+  <Card title="Contract risk flags" icon="file-contract">
+    Interactions with contracts identified as malicious, unverified, or associated with known exploit patterns.
+  </Card>
+  <Card title="Phishing signals" icon="fish">
+    Connections to domains or contracts that match known phishing infrastructure, fake dApps, or address-spoofing patterns.
+  </Card>
+  <Card title="Behavioral anomalies" icon="chart-line">
+    Unusual activity patterns such as rapid approval sequences, transactions to newly deployed contracts, or signs of front-running bots.
+  </Card>
+</CardGroup>
+
+## AI-powered analysis
+
+<Info>
+  AI-powered analysis is available on the **Premium** plan.
+</Info>
+
+On the Premium plan, NZOChain applies advanced machine-learning models to your wallet's activity history. These models detect threats that have no known signature — emerging attack patterns, obfuscated malicious contracts, and zero-day phishing campaigns. Standard analysis relies on known threat databases; AI analysis extends coverage to novel and evolving threats your wallet may not have encountered before.
+
+## RiskScore history
+
+<Info>
+  RiskScore history is available on the **Pro** and **Premium** plans.
+</Info>
+
+Pro and Premium users can view a full timeline of their RiskScore over time. History lets you:
+
+- Identify exactly when your score changed and what caused the change
+- Track the impact of revoking approvals or removing risky connections
+- Audit wallet activity for a specific period, useful for compliance or personal review
+
+The history view is accessible from your dashboard under **Wallet Overview → Score History**.
+
+## How scores update
+
+Your RiskScore™ recalculates in real time whenever:
+
+- A new token approval is detected on any monitored chain
+- You interact with a contract that has risk signals
+- NZOChain's threat database adds a new entry matching your wallet's connections
+- A phishing or drainer campaign is identified that targets contracts you've interacted with
+
+You do not need to manually refresh or re-scan — the score stays current automatically.

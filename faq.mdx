@@ -1,0 +1,116 @@
+---
+title: "NZOChain FAQ: Security, Privacy, and Plans"
+description: "Find answers to common questions about how NZOChain works, which blockchains are supported, plan features, and how wallet security is maintained."
+sidebarTitle: "FAQ"
+---
+
+If you're new to NZOChain or have questions about how protection works, the answers below cover the most common topics — from privacy and security fundamentals to plan features and API integration. If you don't find what you're looking for here, contact support from your dashboard.
+
+<AccordionGroup>
+  <Accordion title="Can NZOChain access my funds?">
+    No. NZOChain never has access to your funds, private keys, or seed phrase. The connection between NZOChain and your wallet is strictly read-only. NZOChain reads your on-chain activity, approvals, and contract interactions to assess risk — it has no ability to move assets, sign transactions on your behalf, or access your wallet credentials in any form.
+
+    If any service claiming to be NZOChain asks for your seed phrase or private key, it is a phishing attempt. Do not provide this information to anyone.
+  </Accordion>
+
+  <Accordion title="How does wallet protection work?">
+    NZOChain analyzes the full risk surface of your wallet in real time. This includes:
+
+    - **Token approvals** — identifying unlimited or overly broad permissions granted to contracts
+    - **Transaction signatures** — analyzing what a transaction will actually do before you confirm it
+    - **Contract interactions** — checking contracts against known malicious signatures and behavioral patterns
+    - **Phishing detection** — flagging sites and contracts associated with known phishing campaigns and wallet drainers
+
+    When a threat is detected, NZOChain alerts you before the risk becomes damage. On Pro and Premium plans, protection activates at the exact moment you're about to sign — so you can review and cancel before anything is committed on-chain.
+  </Accordion>
+
+  <Accordion title="Can I revoke dangerous approvals?">
+    Yes. On Pro and Premium plans, NZOChain includes a permission revoke tool that lets you cancel dangerous token approvals directly within the protection flow. The Premium plan includes a full approval manager, which gives you a complete view of every active approval across all your monitored wallets and chains so you can review and revoke in bulk.
+
+    The Free plan includes basic approval detection — you can see which approvals are flagged, but the one-click revoke tool requires a Pro or Premium subscription.
+  </Accordion>
+
+  <Accordion title="Which blockchains are supported?">
+    NZOChain supports more than 30 blockchains, including:
+
+    - Ethereum
+    - Solana
+    - Polygon
+    - Arbitrum
+    - BNB Chain
+    - Base
+    - 24+ additional EVM and non-EVM networks
+
+    For the full list of supported chains and details on how multi-chain monitoring works, see [Supported Blockchains](/networks/overview).
+  </Accordion>
+
+  <Accordion title="What wallets can I connect?">
+    NZOChain supports the following wallets:
+
+    - **MetaMask** — browser extension, EVM chains, direct connection
+    - **WalletConnect** — protocol-based, multi-chain, QR code or deep link
+    - **Phantom** — browser extension, Solana, direct connection
+    - **Trust Wallet** — mobile, multi-chain, via WalletConnect
+    - **Coinbase Wallet** — browser and mobile, multi-chain, via WalletConnect
+
+    For connection instructions and privacy details, see [Supported Wallets](/networks/wallet-integrations).
+  </Accordion>
+
+  <Accordion title="What is a RiskScore™?">
+    RiskScore™ is NZOChain's threat exposure metric for a wallet. It is a 0–100 score calculated from the current state of your wallet's approvals, contract interactions, and behavioral signals across all monitored chains. The score maps to four levels:
+
+    - **Safe** — no significant threats detected
+    - **Warning** — moderate risk signals present, review recommended
+    - **High Risk** — active threats identified, action recommended
+    - **Critical** — severe exposure detected, immediate action required
+
+    The Free plan provides a basic RiskScore™. Pro adds full history so you can track how your score changes over time. Premium uses AI-powered analysis for faster and more accurate threat classification.
+  </Accordion>
+
+  <Accordion title="What happens if I get a Critical risk score?">
+    A Critical RiskScore™ means NZOChain has identified severe threat exposure in your wallet — such as an active wallet drainer approval, interaction with a known malicious contract, or a high-confidence phishing signature. Immediate action is recommended.
+
+    When your score reaches Critical, NZOChain will:
+
+    1. Send an alert through your configured channels (email, push, or Telegram depending on your plan)
+    2. Show you a breakdown of the specific items driving the Critical score
+    3. Guide you through revoking the flagged permissions (Pro and Premium plans)
+
+    Do not interact with flagged contracts or approve new transactions until you have reviewed and resolved the flagged items.
+  </Accordion>
+
+  <Accordion title="Is there a free plan?">
+    Yes. The Free plan is available at no cost with no credit card required. It includes:
+
+    - 1 protected wallet
+    - Basic RiskScore™
+    - 50 risk scans per day
+    - Malicious contract checks
+    - Basic approval detection
+    - Email alerts
+
+    You can upgrade to Pro or Premium at any time from your dashboard. See [Individual Plans](/pricing/individual) for a full comparison.
+  </Accordion>
+
+  <Accordion title="How do I integrate NZOChain into my dApp?">
+    NZOChain's REST API is available on the Startup plan and above. The API lets you scan wallet addresses, retrieve risk scores, monitor wallets, and receive threat events via webhooks — all programmatically from your own application.
+
+    To get started:
+
+    1. Sign up for a Startup, Growth, or Enterprise plan at [nzochain.com/enterprise](https://nzochain.com/enterprise)
+    2. Generate your API key from the dashboard
+    3. Review the [API Reference](/api/overview) for endpoint documentation and authentication details
+
+    For high-volume use cases, bulk scanning, or white-label deployments, the Growth and Enterprise plans offer the capacity and features your platform needs.
+  </Accordion>
+
+  <Accordion title="What is transaction simulation?">
+    Transaction simulation is a Pro and Premium feature that runs a dry-run of a transaction before you sign it. When you initiate a transaction, NZOChain submits it to a simulation environment that executes the transaction logic without committing anything on-chain. The result shows you:
+
+    - What assets would move and in which direction
+    - Which contracts would be called and what permissions would be granted
+    - Any risk signals associated with the simulated outcome
+
+    This gives you a clear picture of what you're actually signing before you approve it — particularly useful for complex DeFi interactions, NFT mints, and any transaction involving an unfamiliar contract.
+  </Accordion>
+</AccordionGroup>

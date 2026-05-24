@@ -1,0 +1,57 @@
+---
+title: "NZOChain REST API: Web3 Threat Intelligence"
+description: "The NZOChain REST API gives your application real-time wallet risk scores, contract analysis, and threat alerts. Start with 10k calls on the Startup plan."
+sidebarTitle: "API Overview"
+---
+
+The NZOChain REST API lets you embed real-time Web3 threat intelligence directly into your product. Use it to scan wallet addresses for malicious activity, detect dangerous token approvals, monitor on-chain behavior, and trigger alerts before your users are exposed to harm. Whether you're building a dApp, a non-custodial wallet, a DeFi protocol, or a centralized exchange, the API gives you the signal you need to act.
+
+## Base URL
+
+All API requests are made to the following base URL:
+
+```
+https://api.nzochain.com/v1
+```
+
+## Available endpoints
+
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| `POST` | `/api/risk/scan` | Scan a wallet address for threats |
+| `GET` | `/api/wallet/monitor` | Get monitoring status for a wallet |
+| `POST` | `/api/bulk/scan` | Scan multiple addresses at once |
+| `POST` | `/api/webhooks/subscribe` | Subscribe to real-time threat events |
+
+## Rate limits
+
+Your monthly API call limit depends on your plan. Requests that exceed your limit return a `403 PLAN_LIMIT_EXCEEDED` error.
+
+| Plan | Monthly calls |
+|------|--------------|
+| Startup | 10,000 |
+| Growth | 100,000 |
+| Enterprise | Unlimited |
+
+<Note>
+  You need a Startup plan or above to access the NZOChain API. Sign up at the NZOChain dashboard to get your API key.
+</Note>
+
+## Response format
+
+All responses are returned as JSON. Successful responses include the relevant data fields for the endpoint. Error responses follow a consistent structure with an HTTP status code and an error code string.
+
+## Error codes
+
+| HTTP status | Code | Meaning |
+|-------------|------|---------|
+| `400` | `INVALID_ADDRESS` | Wallet address format is invalid |
+| `401` | `UNAUTHORIZED` | API key missing or invalid |
+| `403` | `PLAN_LIMIT_EXCEEDED` | Monthly API call limit reached |
+| `404` | `WALLET_NOT_FOUND` | No data available for this address |
+| `429` | `RATE_LIMITED` | Request rate exceeded |
+| `500` | `INTERNAL_ERROR` | Unexpected server error |
+
+## Next steps
+
+To start making requests, set up authentication with your API key. See [Authentication](/api/authentication) for instructions on obtaining your key and passing it in requests.

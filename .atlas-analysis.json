@@ -1,0 +1,96 @@
+{
+  "projectType": "saas",
+  "projectName": "NZOChain",
+  "projectDescription": "Real-time Web3 threat intelligence platform that detects malicious contracts, dangerous approvals, and wallet drainers before assets are compromised.",
+  "theme": "luma",
+  "primaryColor": "#6366F1",
+  "lightColor": "#818CF8",
+  "darkColor": "#4338CA",
+  "navigation": {
+    "tabs": [
+      {
+        "tab": "Documentation",
+        "groups": [
+          {
+            "group": "Get Started",
+            "pages": [
+              "introduction",
+              "quickstart",
+              "how-it-works"
+            ]
+          },
+          {
+            "group": "Core Features",
+            "pages": [
+              "features/risk-score",
+              "features/wallet-monitoring",
+              "features/contract-analysis",
+              "features/permission-revoke"
+            ]
+          },
+          {
+            "group": "Supported Networks",
+            "pages": [
+              "networks/overview",
+              "networks/wallet-integrations"
+            ]
+          },
+          {
+            "group": "Plans & Pricing",
+            "pages": [
+              "pricing/individual",
+              "pricing/enterprise"
+            ]
+          },
+          {
+            "group": "FAQ",
+            "pages": [
+              "faq"
+            ]
+          }
+        ]
+      },
+      {
+        "tab": "API Reference",
+        "groups": [
+          {
+            "group": "Overview",
+            "pages": [
+              "api/overview",
+              "api/authentication"
+            ]
+          },
+          {
+            "group": "Endpoints",
+            "pages": [
+              "api/risk-scan",
+              "api/wallet-monitor",
+              "api/bulk-scan",
+              "api/webhooks"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "keyFeatures": [
+    "Real-time wallet threat monitoring",
+    "RiskScore™ with AI-powered analysis",
+    "Malicious contract and token detection",
+    "Infinite approval and permission alerts",
+    "Smart permission revocation",
+    "Transaction simulation before signing",
+    "Phishing and fake dApp detection",
+    "Enterprise REST API with webhooks",
+    "Bulk address scanning",
+    "Support for 30+ blockchains"
+  ],
+  "publicApiSurface": [
+    "POST /api/risk/scan",
+    "GET /api/wallet/monitor",
+    "POST /api/bulk/scan",
+    "POST /api/webhooks/subscribe",
+    "RiskScore™ response object",
+    "Webhook event payload"
+  ]
+}

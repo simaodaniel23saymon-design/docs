@@ -1,0 +1,46 @@
+---
+title: "Supported Blockchains and Multi-Chain Protection"
+description: "NZOChain monitors wallets and contracts across 30+ blockchains. See all supported networks and how multi-chain protection works for your assets."
+sidebarTitle: "Blockchain Support"
+---
+
+NZOChain monitors wallets, contracts, and token approvals across more than 30 blockchains simultaneously. Whether your assets live on Ethereum mainnet, a Layer 2 like Arbitrum, or a non-EVM chain like Solana, NZOChain applies the same threat intelligence layer to every network where you're active.
+
+## How multi-chain coverage works
+
+NZOChain treats each blockchain as an independent security surface. When you connect your wallet, NZOChain scans your activity, approvals, and contract interactions on every supported chain where that address has a history — not just the one currently active in your wallet. Threats are flagged per chain, and your RiskScore™ reflects your exposure across the full multi-chain picture.
+
+Because each blockchain operates independently, the same wallet address can behave very differently across networks. A wallet that is Safe on Ethereum may carry High Risk flags on BNB Chain due to interactions with a flagged contract on that specific network. NZOChain tracks these profiles separately so you always see an accurate, chain-specific assessment.
+
+## Supported chains
+
+| Chain | Type | Status |
+|-------|------|--------|
+| Ethereum | EVM | Supported |
+| Solana | Non-EVM | Supported |
+| Polygon | EVM | Supported |
+| BNB Chain | EVM | Supported |
+| Arbitrum | EVM L2 | Supported |
+| Base | EVM L2 | Supported |
+| + 24 more | Various | Supported |
+
+EVM-compatible chains share much of the same threat detection logic, which means new approval patterns, phishing signatures, and malicious contract fingerprints are applied network-wide as soon as they are identified on any EVM chain. Non-EVM chains like Solana use chain-specific analysis modules built for their instruction model and token program architecture.
+
+## Simultaneous monitoring across chains
+
+When continuous wallet monitoring is active (Pro and Premium plans), NZOChain watches all supported chains in parallel. You don't need to switch networks or re-connect your wallet for each chain. If a threat is detected on any monitored chain — such as a wallet drainer approval on Polygon or a flagged contract interaction on Arbitrum — you receive an alert immediately, regardless of which chain is currently active in your wallet.
+
+Each RiskScore™ update reflects the current threat state across all chains where your address is active. You can drill into per-chain breakdowns from your protection dashboard to see exactly which networks are contributing to your overall score.
+
+## Same address, different risk profiles
+
+The same wallet address can have a different RiskScore™ on different blockchains. This is expected behavior, not an error. Risk is determined by the specific approvals, contracts, and transaction history associated with your address on each chain. For example:
+
+- You may have revoked all dangerous permissions on Ethereum but still have an unreviewed infinite approval outstanding on Polygon.
+- A contract you interacted with on BNB Chain may have been flagged after your original interaction, updating your risk profile on that chain retroactively.
+
+NZOChain surfaces these per-chain distinctions clearly so you can take targeted action on the chains where your exposure is highest.
+
+<Info>
+  NZOChain's chain coverage is actively expanding. New networks are added to the monitoring infrastructure regularly. If you'd like to request support for a specific blockchain, contact support or check the [NZOChain changelog](https://nzochain.com) for the latest additions.
+</Info>

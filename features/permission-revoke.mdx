@@ -1,0 +1,104 @@
+---
+title: "Revoke Token Approvals and Dangerous Permissions"
+description: "NZOChain's permission manager lets you view all active token approvals and revoke dangerous ones instantly, protecting your assets before damage occurs."
+sidebarTitle: "Permission Revoke"
+---
+
+Every time you interact with a DeFi protocol, NFT marketplace, or dApp, you often grant that contract permission to move tokens from your wallet. These permissions — called token approvals — remain active indefinitely unless you explicitly revoke them. An unlimited approval means the approved contract can transfer every token you hold, whenever it wants, without asking you again. NZOChain's permission manager gives you a complete view of every active approval across all your monitored wallets and lets you revoke dangerous ones in a single click.
+
+<Info>
+  Full approval revocation (single and bulk) is available on the **Pro** and **Premium** plans. Free plan users can see a summary of active approvals with basic risk flagging, but cannot revoke directly through NZOChain.
+</Info>
+
+## Understanding approval risk levels
+
+Not all approvals carry the same risk. NZOChain distinguishes between two types:
+
+| Approval type | Description | Risk level |
+|--------------|-------------|------------|
+| **Unlimited approval** | The contract can move any amount of the approved token, forever | High — revoke unless actively needed |
+| **Capped approval** | The contract can only move up to a specific token amount | Lower — review if the cap is large or the contract is unrecognized |
+
+Unlimited approvals are the primary attack surface for wallet drainers. If a protocol you approved becomes compromised or turns malicious, an unlimited approval gives the attacker full access to that token in your wallet.
+
+## How to view your approval manager
+
+<Steps>
+  <Step title="Open Approvals in the dashboard">
+    Log in to NZOChain and click **Approvals** in the left sidebar. The Approval Manager loads a full list of every active permission across your monitored wallets.
+  </Step>
+  <Step title="Filter and sort">
+    Use the filters at the top to sort by risk level, token, chain, or approval date. NZOChain highlights unlimited approvals and approvals granted to flagged contracts at the top by default.
+  </Step>
+  <Step title="Inspect an approval">
+    Click any approval row to see the full details: the spender contract address, approval amount, the date it was granted, and NZOChain's risk assessment of the spender contract.
+  </Step>
+</Steps>
+
+## How to revoke a single approval
+
+<Steps>
+  <Step title="Locate the approval">
+    Find the approval you want to revoke in the Approval Manager. You can search by token name, contract address, or chain.
+  </Step>
+  <Step title="Click Revoke">
+    Click the **Revoke** button on the approval row. NZOChain prepares a revocation transaction and presents it for your confirmation.
+  </Step>
+  <Step title="Sign the transaction">
+    Your connected wallet (MetaMask, WalletConnect, Phantom, etc.) will prompt you to sign the revocation transaction. Confirm it in your wallet.
+  </Step>
+  <Step title="Confirmation">
+    Once the transaction is confirmed on-chain, the approval disappears from your Approval Manager. The spender contract can no longer move that token from your wallet.
+  </Step>
+</Steps>
+
+## How to bulk-revoke multiple approvals
+
+<Info>
+  Bulk revocation is available on the **Pro** and **Premium** plans.
+</Info>
+
+If you have accumulated many approvals — common after months of DeFi activity — revoking them one at a time is slow. Bulk revocation lets you select multiple approvals and process them together.
+
+<Steps>
+  <Step title="Select approvals to revoke">
+    In the Approval Manager, check the boxes next to each approval you want to revoke. You can also use **Select All Flagged** to automatically select all approvals that NZOChain has marked as high risk.
+  </Step>
+  <Step title="Click Bulk Revoke">
+    Click the **Bulk Revoke** button that appears in the action bar at the bottom of the screen.
+  </Step>
+  <Step title="Review the batch">
+    NZOChain shows a summary of all approvals included in the batch. Review the list before proceeding to make sure you haven't included approvals you need to keep.
+  </Step>
+  <Step title="Sign each transaction">
+    Your wallet will prompt you to sign one transaction per approval. Each revocation is an individual on-chain transaction and requires a separate confirmation. Sign each one as they appear.
+  </Step>
+  <Step title="Monitor progress">
+    NZOChain tracks the status of each revocation in real time. Completed revocations are removed from the list as each transaction confirms.
+  </Step>
+</Steps>
+
+## What changes after revocation
+
+Revoking an approval submits a transaction to the blockchain that sets the approval amount for that spender to zero. After the transaction confirms:
+
+- The spender contract can no longer transfer that token from your wallet
+- The approval no longer appears in your NZOChain Approval Manager
+- Your RiskScore™ recalculates automatically and typically decreases
+- The change is permanent on-chain — the protocol cannot re-assume the approval without you signing a new one
+
+Revocation does not affect your token balance. Your tokens stay in your wallet; you are only removing the contract's permission to move them.
+
+<Warning>
+  Revoking an approval for a contract you are actively using in DeFi will break that integration. If you have tokens staked, liquidity deposited, or open positions in a protocol, revoking the associated approval may prevent the protocol from managing those positions — which could result in failed transactions, loss of rewards, or inability to exit positions normally. Always verify that an approval is no longer needed before revoking it.
+</Warning>
+
+## Plans and access
+
+| Feature | Free | Pro | Premium |
+|---------|------|-----|---------|
+| View active approvals | Basic summary | Full list | Full list |
+| Risk flagging | Limited | Full | Full |
+| Single approval revocation | No | Yes | Yes |
+| Bulk revocation | No | Yes | Yes |
+| Revocation history | No | Yes | Yes |
