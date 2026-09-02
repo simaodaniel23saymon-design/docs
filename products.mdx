@@ -1,0 +1,32 @@
+---
+title: "Produtos e superfícies"
+description: "Onde vive cada parte da NZOChain: landing, app B2C, portal de developers e API."
+sidebarTitle: "Produtos"
+---
+
+A NZOChain é infraestrutura de segurança Web3 da **ASC AxiomTech**. Nunca pedimos chave privada nem seed phrase. Só tu assinas.
+
+## Superfícies
+
+| Superfície | URL | Para quem |
+|---|---|---|
+| Landing | [nzochain.com](https://nzochain.com) | Marketing, preços, SEO (PT default; `/en/`, `/es/`, `/fr/`, `/zh/`, `/hi/`) |
+| App B2C | [app.nzochain.com](https://app.nzochain.com) | Protecção de wallets, scan, revogação, simulação, planos |
+| Portal B2B | [developers.nzochain.com](https://developers.nzochain.com) | Chaves API, billing, webhooks, API v1 |
+| API | [api.nzochain.com](https://api.nzochain.com) | REST (`/api/...` e `/api/v1/...`) |
+| Docs | [docs.nzochain.com](https://docs.nzochain.com) | Esta documentação |
+| Contacto | [nzochain.com/contact](https://nzochain.com/contact) | Vendas Enterprise e legal |
+
+## Idiomas
+
+App B2C, portal e landing: **PT (default) · EN · ES · FR · ZH · HI**. A escolha grava-se no cookie `nzochain-locale`. O admin interno usa só PT/EN.
+
+## Números públicos
+
+`GET https://api.nzochain.com/api/stats/public` devolve métricas de **produto** (scans, contratos, 4 blockchains, revogações, utilizadores). Empresas e scans via API **não** são públicos — ficam no painel interno.
+
+## O que não somos
+
+- Não somos custódia. Não movemos fundos.
+- Não pedimos seed. Login B2C é ligação de carteira + assinatura de mensagem (prova de posse).
+- O portal B2B autentica developers (email / sessão); as chamadas de produto usam `X-API-Key`.

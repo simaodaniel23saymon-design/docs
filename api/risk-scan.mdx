@@ -1,21 +1,27 @@
 ---
 title: "POST /api/risk/scan — Wallet Threat Scan"
-description: "Scan a wallet address for threats and receive a RiskScore™ with detailed warnings. Accepts EVM and Solana addresses. Returns score 0–100."
+description: "Scan legado de uma wallet EVM. Prefere POST /api/v1/wallets/risk."
 sidebarTitle: "Risk Scan"
 ---
 
-The risk scan endpoint analyzes a wallet address and returns a RiskScore™ between 0 and 100, a categorical threat status, and a list of specific warnings describing any detected threats. Use it to gate transactions, display risk indicators in your UI, or trigger downstream alerts in your application. Both EVM-compatible addresses (e.g., Ethereum, Polygon) and Solana addresses are supported.
+<Note>
+  Integração B2B canónica: **[API v1](/api/v1)** (`POST /api/v1/wallets/risk`) com `X-API-Key`.
+  Esta página é o caminho **legado**. URL correcto: `https://api.nzochain.com/api/risk/scan`.
+  Só EVM nas quatro redes suportadas — não Solana.
+</Note>
+
+The risk scan endpoint analyzes a wallet address and returns risk signals for product integrations that still use the legacy path.
 
 ## Endpoint
 
 ```
-POST https://api.nzochain.com/v1/api/risk/scan
+POST https://api.nzochain.com/api/risk/scan
 ```
 
 ## Request body
 
 <ParamField body="wallet" type="string" required>
-  The wallet address to scan. Accepts EVM addresses (starting with `0x`) and Solana public keys.
+  Morada EVM (`0x…`) numa das quatro redes suportadas.
 </ParamField>
 
 <ParamField body="chain" type="string">
@@ -90,8 +96,8 @@ POST https://api.nzochain.com/v1/api/risk/scan
 <CodeGroup>
 
 ```bash cURL
-curl -X POST https://api.nzochain.com/v1/api/risk/scan \
-  -H "Authorization: Bearer YOUR_API_KEY" \
+curl -X POST https://api.nzochain.com/api/risk/scan \
+  -H "X-API-Key: pk_live_YOUR_API_KEY" \
   -H "Content-Type: application/json" \
   -d '{
     "wallet": "0x742d35Cc6634C0532925a3b8D4C9B5e55d7b1234",
@@ -101,10 +107,10 @@ curl -X POST https://api.nzochain.com/v1/api/risk/scan \
 ```
 
 ```javascript JavaScript
-const response = await fetch('https://api.nzochain.com/v1/api/risk/scan', {
+const response = await fetch('https://api.nzochain.com/api/risk/scan', {
   method: 'POST',
   headers: {
-    'Authorization': `Bearer ${process.env.NZOCHAIN_API_KEY}`,
+    'X-API-Key': process.env.NZOCHAIN_API_KEY,
     'Content-Type': 'application/json',
   },
   body: JSON.stringify({
@@ -127,9 +133,9 @@ import os
 import requests
 
 response = requests.post(
-    'https://api.nzochain.com/v1/api/risk/scan',
+    'https://api.nzochain.com/api/risk/scan',
     headers={
-        'Authorization': f'Bearer {os.environ["NZOCHAIN_API_KEY"]}',
+        'X-API-Key': os.environ["NZOCHAIN_API_KEY"],
         'Content-Type': 'application/json',
     },
     json={

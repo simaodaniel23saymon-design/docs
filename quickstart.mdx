@@ -1,85 +1,39 @@
 ---
-title: "Get Started with NZOChain Wallet Protection in Minutes"
-description: "Learn how to connect your wallet, receive a RiskScore™, and revoke dangerous permissions with NZOChain — from setup to protected in under 5 minutes."
+title: "Começar na app em minutos"
+description: "Liga a carteira em app.nzochain.com, corre um scan e revoga autorizações perigosas. Sem seed, sem custódia."
 sidebarTitle: "Quickstart"
 ---
 
-NZOChain is designed to be running in minutes. You connect your wallet, NZOChain scans your approvals and contract interactions, and you get a clear picture of your risk exposure — along with one-click tools to fix any problems found. This guide walks you through the entire process from creating an account to acting on your first scan results.
+## B2C — proteger a tua wallet
 
-## Prerequisites
+1. Abre [app.nzochain.com](https://app.nzochain.com).
+2. Liga a carteira e **assina uma mensagem**. É prova de posse — **não move fundos**.
+3. A NZOChain analisa aprovações, contratos e ligações nas **4 redes** suportadas.
+4. Vês o nível de risco (Safe / Warning / High Risk / Critical) e o que está activo.
+5. Para revogar, confirmas a transacção **na tua carteira**.
 
-Before you begin, confirm that you have:
+<Warning>
+Se alguém a fingir ser a NZOChain pedir seed ou chave privada, é phishing. Nós nunca pedimos isso.
+</Warning>
 
-- A supported wallet: MetaMask, WalletConnect, Phantom, Trust Wallet, or Coinbase Wallet
-- A wallet on a supported blockchain — see [Supported Networks](/networks/overview) for the full list
-- A web browser with your wallet extension installed, or a mobile wallet app ready to scan a QR code
+Planos: [Free → Premium](/pricing/individual). O Free chega para 1 wallet.
 
-## Set up and run your first scan
+## B2B — integrar a API
 
-<Steps>
-  <Step title="Create a free account">
-    Go to [nzochain.com](https://nzochain.com) and click **Get Started**. Sign up with your email address. No payment information is required for the free plan.
+1. Cria conta em [developers.nzochain.com](https://developers.nzochain.com).
+2. Cria um projecto e uma API key (`pk_live_...`).
+3. Envia `X-API-Key` em `https://api.nzochain.com/api/...`.
+4. Wallet/contract risk está no **Free**. `analyze` / `simulate` exigem **Starter+**. Threat intel exige **Growth+**.
 
-    Once your account is created, you land on the NZOChain dashboard. Your wallet list will be empty until you connect one.
-  </Step>
+Detalhe: [Autenticação](/api/authentication) e [API v1](/api/v1).
 
-  <Step title="Connect your wallet">
-    Click **Connect Wallet** in the top right corner of the dashboard. Select your wallet provider from the list:
+## Exemplo mínimo (v1)
 
-    - **MetaMask** — approve the connection request in your browser extension
-    - **WalletConnect** — scan the QR code with your mobile wallet app
-    - **Phantom** — approve the connection in your browser extension or mobile app
-    - **Trust Wallet / Coinbase Wallet** — follow the on-screen prompt for your wallet type
+```bash
+curl -X POST "https://api.nzochain.com/api/v1/wallets/risk?lang=en" \
+  -H "Content-Type: application/json" \
+  -H "X-API-Key: pk_live_SUA_CHAVE" \
+  -d '{"wallet":"0x...","network":"ethereum"}'
+```
 
-    NZOChain only reads your public wallet address. It does not request signing permissions or access to your private keys.
-  </Step>
-
-  <Step title="Run your first scan">
-    After connecting, NZOChain immediately begins analyzing your wallet. The scan covers:
-
-    - **Token approvals** — all active permissions you've granted to contracts, including the approved amount and the contract address
-    - **Contract interactions** — the risk profile of every smart contract your wallet has interacted with
-    - **Open permissions** — any broad or unusual access grants that could expose your assets
-    - **Known threat signatures** — cross-references against NZOChain's database of malicious contracts, phishing addresses, and flagged tokens
-
-    Most scans complete in under 30 seconds. Wallets with extensive transaction history may take slightly longer.
-  </Step>
-
-  <Step title="Review your RiskScore™ dashboard">
-    When the scan finishes, your dashboard displays your **RiskScore™** — a number from 0 to 100 that summarizes your overall risk exposure. The score maps to one of four levels:
-
-    | Score range | Status | What it means |
-    |---|---|---|
-    | 0–30 | **Safe** | No significant threats detected |
-    | 31–60 | **Warning** | Some risky approvals or contracts found — review recommended |
-    | 61–85 | **High Risk** | Multiple active threats — action advised |
-    | 86–100 | **Critical** | Severe exposure — revoke dangerous permissions immediately |
-
-    Below the score, you'll find a breakdown of every flagged item: the contract address, the risk type, the severity, and a recommended action.
-  </Step>
-
-  <Step title="Revoke dangerous permissions">
-    If NZOChain flags any approvals or permissions as risky, you can revoke them directly from the dashboard. Find the flagged item in your results list and click **Revoke**.
-
-    NZOChain constructs the revocation transaction and sends it to your wallet for confirmation. You sign the transaction — NZOChain never signs on your behalf. Once confirmed, the approval is removed from the blockchain and your RiskScore updates to reflect the change.
-
-    <Warning>
-      Revoking an approval may break integrations with legitimate dApps that rely on it. If you're unsure whether an approval is safe to remove, review the contract details before revoking.
-    </Warning>
-  </Step>
-</Steps>
-
-<Tip>
-  **Transaction simulation** is available on Pro and Premium plans. Before you sign any transaction — not just revocations — NZOChain simulates it and shows you a plain-language summary of what will happen: which assets will move, which approvals will be granted, and whether any hidden actions are included. Upgrade your plan from **Settings → Plan** to enable simulation.
-</Tip>
-
-## What's next
-
-<CardGroup cols={2}>
-  <Card title="RiskScore explained" icon="gauge-high" href="/features/risk-score">
-    Learn how NZOChain calculates your score and what factors drive each risk level.
-  </Card>
-  <Card title="API reference" icon="code" href="/api/overview">
-    Integrate NZOChain's threat intelligence directly into your application or dApp.
-  </Card>
-</CardGroup>
+Resposta normalizada: `riskLevel`, `decision` (`ALLOW | REVIEW | BLOCK`), `reasons` em linguagem humana.

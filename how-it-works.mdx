@@ -7,7 +7,7 @@ sidebarTitle: "How It Works"
 When you connect a wallet to NZOChain, you're not running a one-time audit. NZOChain continuously watches your on-chain activity and runs every new interaction through the same detection pipeline — the same set of checks that analyzed your wallet during setup. Understanding how that pipeline works helps you interpret your RiskScore, know what to act on, and trust that the platform's alerts are meaningful rather than noisy.
 
 <Info>
-  NZOChain is entirely read-only. It monitors publicly available on-chain data — transaction history, approval records, contract bytecode, and connection events. It never executes transactions, moves funds, or signs anything on your behalf.
+  NZOChain is entirely read-only with respect to funds. It never holds private keys. Revokes and other on-chain actions are signed **by you** in your wallet. Scan coverage is **four EVM chains** — see [Networks](/networks/overview).
 </Info>
 
 ## The detection pipeline
@@ -16,7 +16,7 @@ When NZOChain receives a wallet address — whether from a new connection, a sca
 
 <Steps>
   <Step title="Connect: ingest wallet data">
-    NZOChain fetches the complete on-chain record for your wallet address. This includes your full transaction history, every active token approval, all smart contract interactions, and your current token balances. For multi-chain wallets, this process runs across every supported chain simultaneously.
+    NZOChain fetches the on-chain record for your wallet address: approvals, contract interactions and balances on the **four supported EVM networks**.
 
     No off-chain data, private keys, or browser state is accessed. Everything NZOChain reads is publicly available on the blockchain.
   </Step>
@@ -71,7 +71,7 @@ Your RiskScore maps to one of four statuses. The thresholds are calibrated so th
 
 NZOChain monitors all connected chains in parallel. Your overall RiskScore reflects your highest-risk chain — a wallet that is Safe on Ethereum but Critical on Polygon will display a Critical score overall. The dashboard breaks down your score by chain so you can see exactly where the risk originates.
 
-Each supported chain uses the same detection pipeline, with chain-specific rule sets applied where the threat landscape differs. Solana, for example, has a distinct approval model from EVM chains, and NZOChain's Solana analysis accounts for those differences.
+Each supported chain uses the same detection pipeline, with chain-specific RPC and explorers. Current scan networks are Ethereum, BNB Chain, Polygon and Arbitrum only.
 
 See [Supported Networks](/networks/overview) for the full list of supported blockchains and any chain-specific considerations.
 

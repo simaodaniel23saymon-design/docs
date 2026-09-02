@@ -1,99 +1,43 @@
 ---
-title: "Enterprise API Plans for Web3 Companies"
-description: "Scale Web3 threat intelligence into your dApp or platform. Compare NZOChain's Startup, Growth, and Enterprise API plans with SLA and support details."
-sidebarTitle: "Enterprise Plans"
+title: "Planos API (B2B)"
+description: "Free, Starter, Growth, Business e Enterprise — Transaction Firewall, simulação, threat intel e overage."
+sidebarTitle: "Planos API (B2B)"
 ---
 
-NZOChain's enterprise plans expose the full threat intelligence engine through a REST API, so you can embed real-time risk analysis directly into your product. dApps, wallet providers, DeFi protocols, NFT platforms, and exchanges use NZOChain to scan addresses, monitor wallets, and surface risk signals to their own users — without building or maintaining a threat intelligence infrastructure themselves.
+Portal: [developers.nzochain.com](https://developers.nzochain.com) · Contacto Enterprise: [nzochain.com/contact](https://nzochain.com/contact)
 
-<Tabs>
-  <Tab title="Startup">
-    ## Startup plan
+O plano **Free** serve para experimentar a API de risco (wallet + contrato). **Não inclui Transaction Firewall** (`analyze` / `simulate`). Chamadas extra **não bloqueiam**: registamos overage e facturamos no fim do ciclo.
 
-    **$99 / month**
+## Matriz de features
 
-    The Startup plan gives early-stage projects and small teams immediate API access to NZOChain's risk scanning and webhook infrastructure. It's designed to get your integration live quickly with a manageable call volume and straightforward email support.
+| Feature | Free | Starter | Growth | Business | Enterprise |
+|---|---|---|---|---|---|
+| Preço | $0 | $49 / mês | $149 / mês | $499 / mês | Contrato |
+| API calls / mês | 1 000 | 25 000 | 100 000 | 500 000 | Ilimitado |
+| Transaction Firewall | Não | Sim | Sim | Sim | Sim |
+| Simulações / mês | 0 | 100 | 2 000 | 10 000 | Ilimitado |
+| Threat intel | Não | Não | Standard | Completo | Completo + SLA |
+| Overage / call extra | $0.01 | $0.004 | $0.002 | $0.001 | Contrato |
 
-    **Best for:** Early-stage dApps, indie developers, and small teams integrating threat detection for the first time.
+## O que cada plano desbloqueia em `/api/v1`
 
-    ### What's included
+| Endpoint | Free | Starter+ | Growth+ |
+|---|---|---|---|
+| `POST /v1/wallets/risk` | Sim (quota de calls) | Sim | Sim |
+| `POST /v1/contracts/risk` | Sim | Sim | Sim |
+| `POST /v1/transactions/analyze` | **403 PLAN_UPGRADE_REQUIRED** | Sim | Sim |
+| `POST /v1/transactions/simulate` | 403 | Sim, até à quota | Sim |
+| `POST /v1/threats/check` | 403 | 403 | Sim |
 
-    - REST API access
-    - 10,000 API calls per month
-    - Webhook events
-    - Basic analytics
-    - Monitoring dashboard
-    - Email support
+Quando a quota de simulação acaba: **403 `SIMULATION_QUOTA`** com `used` e `quota`.  
+Quando a feature não está no plano: **403 `PLAN_UPGRADE_REQUIRED`** com `upgradeUrl` (tipicamente `/pricing` no portal).
 
-    [Get API access →](https://nzochain.com/enterprise)
-  </Tab>
-  <Tab title="Growth">
-    ## Growth plan
+Overage de **API calls** é registado (`UsageOverage`) **sem bloquear** o pedido.
 
-    **$299 / month**
+## Notas
 
-    The Growth plan is built for products with real user traffic. Bulk address scanning lets you process large batches of addresses in a single request — critical for platforms that need to screen many wallets at once. The 99.99% uptime SLA ensures your security layer doesn't become a reliability risk for your own users.
+- Autenticação das rotas v1: header `X-API-Key` (chave `pk_live_...` gerada no portal).
+- Base URL: `https://api.nzochain.com/api`
+- Enterprise: SLA, volume e integrações à medida — [contacto](https://nzochain.com/contact).
 
-    **Best for:** Growing DeFi protocols, wallet apps, NFT marketplaces, and exchange compliance teams with active scan volumes.
-
-    ### What's included
-
-    - 100,000 API calls per month
-    - Bulk address scanning
-    - Advanced analytics
-    - Threat intelligence feed
-    - Webhook events
-    - 99.99% uptime SLA
-    - Dedicated Slack support
-    - Monitoring dashboard
-
-    [Start Growth →](https://nzochain.com/enterprise?plan=growth)
-  </Tab>
-  <Tab title="Enterprise">
-    ## Enterprise plan
-
-    **Custom pricing**
-
-    The Enterprise plan is a fully customized deployment for organizations that need unlimited capacity, white-label options, or on-premise infrastructure. A dedicated account team, custom SLA, and security audit reports make this the right choice for regulated environments and large-scale deployments.
-
-    **Best for:** Exchanges, custodians, institutional wallet providers, and compliance-driven organizations with specific infrastructure, SLA, or branding requirements.
-
-    ### What's included
-
-    - Unlimited API calls
-    - White-label solution
-    - On-premise deployment option
-    - Dedicated infrastructure
-    - Custom SLA
-    - 24/7 dedicated support
-    - Security audit reports
-    - Compliance and audit reports
-    - Bulk address scanning
-    - Threat intelligence feed
-    - Advanced analytics (custom)
-    - Webhook events
-
-    [Contact sales →](https://nzochain.com/enterprise/contact)
-  </Tab>
-</Tabs>
-
-## Plan comparison
-
-| Feature | Startup | Growth | Enterprise |
-|---------|---------|--------|------------|
-| API calls / month | 10k | 100k | Unlimited |
-| Bulk scanning | — | ✓ | ✓ |
-| Analytics | Basic | Advanced | Custom |
-| Uptime SLA | Standard | 99.99% | Custom |
-| Support | Email | Dedicated Slack | 24/7 dedicated |
-| White-label | — | — | ✓ |
-| On-premise | — | — | ✓ |
-| Webhook events | ✓ | ✓ | ✓ |
-| Threat intelligence feed | — | ✓ | ✓ |
-| Price | $99/mo | $299/mo | Custom |
-
-<Note>
-  Enterprise plan pricing is customized based on your call volume, deployment model, SLA requirements, and support needs. To get a quote or start a conversation with the NZOChain sales team, [contact sales](https://nzochain.com/enterprise/contact) or email enterprise@nzochain.com.
-</Note>
-
-For full API documentation including authentication, endpoint references, and webhook payloads, see the [API Reference](/api/overview).
+Documentação do contrato: [API v1 Firewall](/api/v1).

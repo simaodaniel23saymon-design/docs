@@ -1,0 +1,46 @@
+---
+title: "Erros da API"
+description: "401 de chave, 403 de plano ou quota de simulação, e overage que não bloqueia."
+sidebarTitle: "Errors"
+---
+
+O filtro HTTP devolve JSON com `success: false` e, quando existe, um `code` em `SCREAMING_SNAKE`.
+
+## Auth
+
+| HTTP | Quando |
+|---|---|
+| 401 | `X-API-Key` ausente, inválida ou revogada |
+
+## Plano e quotas (v1)
+
+| HTTP | `code` | Quando |
+|---|---|---|
+| 403 | `PLAN_UPGRADE_REQUIRED` | Feature (Firewall analyze/simulate ou threats) acima do plano. Corpo inclui `feature` e `upgradeUrl`. |
+| 403 | `SIMULATION_QUOTA` | Quota mensal de `simulate` esgotada. Corpo inclui `used` e `quota`. |
+
+Exemplo:
+
+```json
+{
+  "success": false,
+  "statusCode": 403,
+  "code": "PLAN_UPGRADE_REQUIRED",
+  "message": "This API v1 feature requires a higher B2B plan.",
+  "upgradeUrl": "/pricing"
+}
+```
+
+## Volume de API calls
+
+Ultrapassar as calls incluídas **não** bloqueia o pedido. A plataforma grava **UsageOverage** (preço por call extra do plano) para facturar no fim do ciclo.
+
+## Outros
+
+| HTTP | Uso típico |
+|---|---|
+| 400 | Body inválido (morada, network, calldata) |
+| 429 | Rate limit de infra (se activo) |
+| 500 | Falha interna; mensagem ao cliente é genérica em produção |
+
+Stats públicos (`GET /api/stats/public`) **não** exigem API key.

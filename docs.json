@@ -2,16 +2,22 @@
   "$schema": "https://mintlify.com/docs.json",
   "theme": "luma",
   "name": "NZOChain",
+  "description": "Documentação oficial da NZOChain — segurança Web3 não-custodial para utilizadores e API B2B.",
   "colors": {
-    "primary": "#6366F1",
-    "light": "#818CF8",
-    "dark": "#4338CA"
+    "primary": "#00FF88",
+    "light": "#66FFAA",
+    "dark": "#00C46A"
   },
   "navbar": {
     "primary": {
       "type": "button",
-      "label": "Get Started",
-      "href": "https://nzochain.com"
+      "label": "Abrir app",
+      "href": "https://app.nzochain.com"
+    }
+  },
+  "footer": {
+    "socials": {
+      "github": "https://github.com/simaodaniel23saymon-design/docs"
     }
   },
   "navigation": {
@@ -24,7 +30,8 @@
             "pages": [
               "introduction",
               "quickstart",
-              "how-it-works"
+              "how-it-works",
+              "products"
             ]
           },
           {
@@ -52,9 +59,7 @@
           },
           {
             "group": "FAQ",
-            "pages": [
-              "faq"
-            ]
+            "pages": ["faq"]
           }
         ]
       },
@@ -65,11 +70,16 @@
             "group": "Overview",
             "pages": [
               "api/overview",
-              "api/authentication"
+              "api/authentication",
+              "api/errors"
             ]
           },
           {
-            "group": "Endpoints",
+            "group": "API v1 Firewall",
+            "pages": ["api/v1"]
+          },
+          {
+            "group": "Legacy endpoints",
             "pages": [
               "api/risk-scan",
               "api/wallet-monitor",

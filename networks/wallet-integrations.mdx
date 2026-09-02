@@ -8,13 +8,14 @@ NZOChain integrates with the most widely used Web3 wallets so you can activate t
 
 ## Supported wallets
 
-| Wallet | Type | Chains | Connection method |
-|--------|------|--------|------------------|
-| MetaMask | Browser extension | EVM chains | Direct |
-| WalletConnect | Protocol | Multi-chain | QR code / deep link |
-| Phantom | Browser extension | Solana | Direct |
-| Trust Wallet | Mobile | Multi-chain | WalletConnect |
-| Coinbase Wallet | Browser / Mobile | Multi-chain | WalletConnect |
+| Wallet | Type | Chains (scan product) | Connection |
+|--------|------|--------|----------|
+| MetaMask | Browser extension | EVM (4 networks) | Direct |
+| WalletConnect | Protocol | EVM via WC | QR / deep link |
+| Trust Wallet | Mobile | EVM via WC | WalletConnect |
+| Coinbase Wallet | Browser / mobile | EVM via WC | WalletConnect |
+
+Phantom / Solana **não** entram no scan actual das 4 chains EVM. Se a UI listar Phantom, trata-se de conector — não de cobertura Solana no motor.
 
 MetaMask and Phantom use direct browser extension connections, which allows NZOChain to intercept and analyze transactions at the moment they are submitted — before you confirm them. WalletConnect-based wallets (Trust Wallet, Coinbase Wallet) connect via QR code scan or deep link and receive the same real-time analysis through NZOChain's WalletConnect integration layer.
 

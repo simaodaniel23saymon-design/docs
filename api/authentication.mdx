@@ -1,91 +1,56 @@
 ---
-title: "API Authentication and API Key Management"
-description: "NZOChain API uses bearer token authentication. Learn how to get your API key, pass it in requests, and handle authentication errors."
+title: "Autenticação da API"
+description: "Usa X-API-Key com a chave do portal de developers. Não coloques a chave no frontend público."
 sidebarTitle: "Authentication"
 ---
 
-Every request to the NZOChain API must include a valid API key. Authentication uses the standard HTTP bearer token scheme — you pass your key in the `Authorization` header of each request. There are no cookies, sessions, or OAuth flows to set up.
+As rotas B2B (`/api/v1/...` e a maior parte do `/api` de developers) exigem o header:
 
-## Getting your API key
+```
+X-API-Key: pk_live_...
+```
 
-1. Log in to the [NZOChain dashboard](https://app.nzochain.com).
-2. Go to **Settings → API Keys**.
-3. Click **Generate new key** and copy the value immediately — it is only shown once.
+Não é sessão cookie e **não** é `Authorization: Bearer` nestas rotas.
 
-If you lose your key, you can revoke it and generate a new one from the same page.
+## Obter a chave
 
-## Passing your API key
+1. Entra em [developers.nzochain.com](https://developers.nzochain.com).
+2. Cria um projecto.
+3. Gera uma API key e guarda-a — trata-a como segredo.
 
-Include your key as a bearer token in the `Authorization` header on every request:
+A app B2C ([app.nzochain.com](https://app.nzochain.com)) **não** usa esta chave: usa ligação de carteira.
+
+## Exemplo
 
 ```bash
-curl -X POST https://api.nzochain.com/v1/api/risk/scan \
-  -H "Authorization: Bearer YOUR_API_KEY" \
+curl -X POST "https://api.nzochain.com/api/v1/wallets/risk?lang=pt" \
   -H "Content-Type: application/json" \
-  -d '{"wallet": "0x742d35Cc6634C0532925a3b8D4C9B5e55d7b1234"}'
+  -H "X-API-Key: pk_live_SUA_CHAVE" \
+  -d '{"wallet":"0x742d35Cc6634C0532925a3b8D4C9B5e55d7b1234","network":"ethereum"}'
 ```
 
-## Code examples
-
-<CodeGroup>
-
-```bash cURL
-curl -X POST https://api.nzochain.com/v1/api/risk/scan \
-  -H "Authorization: Bearer YOUR_API_KEY" \
-  -H "Content-Type: application/json" \
-  -d '{"wallet": "0x742d35Cc6634C0532925a3b8D4C9B5e55d7b1234"}'
-```
-
-```javascript JavaScript
-const response = await fetch('https://api.nzochain.com/v1/api/risk/scan', {
+```javascript
+const res = await fetch('https://api.nzochain.com/api/v1/wallets/risk?lang=en', {
   method: 'POST',
   headers: {
-    'Authorization': `Bearer ${process.env.NZOCHAIN_API_KEY}`,
     'Content-Type': 'application/json',
+    'X-API-Key': process.env.NZOCHAIN_API_KEY,
   },
-  body: JSON.stringify({
-    wallet: '0x742d35Cc6634C0532925a3b8D4C9B5e55d7b1234',
-  }),
+  body: JSON.stringify({ wallet: '0x...', network: 'ethereum' }),
 });
-
-const data = await response.json();
-console.log(data);
+const { success, data } = await res.json();
 ```
 
-```python Python
-import os
-import requests
+## Erros de auth
 
-response = requests.post(
-    'https://api.nzochain.com/v1/api/risk/scan',
-    headers={
-        'Authorization': f'Bearer {os.environ["NZOCHAIN_API_KEY"]}',
-        'Content-Type': 'application/json',
-    },
-    json={
-        'wallet': '0x742d35Cc6634C0532925a3b8D4C9B5e55d7b1234',
-    },
-)
+| HTTP | Significado |
+|---|---|
+| 401 | `X-API-Key` em falta, inválida ou revogada |
 
-print(response.json())
-```
+403 de **plano** (`PLAN_UPGRADE_REQUIRED`, `SIMULATION_QUOTA`) são outra coisa — ver [erros](/api/errors).
 
-</CodeGroup>
+## Boas práticas
 
-## Authentication errors
-
-| HTTP status | Cause | Resolution |
-|-------------|-------|------------|
-| `401 Unauthorized` | API key is missing, malformed, or has been revoked | Check that your `Authorization` header is present and formatted as `Bearer YOUR_API_KEY` |
-| `403 Forbidden` | Key is valid but your plan does not include this endpoint | Upgrade your plan or check endpoint availability in the [API Overview](/api/overview) |
-
-## Security best practices
-
-- **Use environment variables.** Store your API key in an environment variable (e.g., `NZOCHAIN_API_KEY`) and read it at runtime. Never hard-code it in your source files.
-- **Keep keys server-side.** Never include your API key in client-side JavaScript, mobile app bundles, or any code that is shipped to end users.
-- **Rotate keys periodically.** Regenerate your API key on a regular schedule and immediately after any suspected exposure.
-- **Use separate keys per environment.** Generate distinct keys for development, staging, and production so you can revoke one without affecting the others.
-
-<Warning>
-  Never commit your API key to source control. If a key is accidentally committed, revoke it immediately from the NZOChain dashboard and generate a replacement. Treat any exposed key as compromised.
-</Warning>
+- Só no servidor. Nunca no JavaScript do browser de um dApp público.
+- Variável de ambiente. Roda chaves se vazarem.
+- Uma chave por ambiente (dev / prod).

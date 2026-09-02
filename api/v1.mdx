@@ -1,0 +1,93 @@
+---
+title: "API v1 — Transaction Firewall"
+description: "Contrato B2B: wallets, contratos, analyze, simulate e threats. Gating por plano e quotas de simulação."
+sidebarTitle: "API v1"
+---
+
+Prefixo: `https://api.nzochain.com/api/v1`  
+Auth: `X-API-Key`  
+Query opcional: `lang=pt` ou `lang=en`
+
+O `/api` antigo **não é removido**. A v1 é **aditiva**.
+
+## Endpoints
+
+| Método | Path | Plano mínimo |
+|---|---|---|
+| `POST` | `/v1/wallets/risk` | Free |
+| `POST` | `/v1/contracts/risk` | Free |
+| `POST` | `/v1/transactions/analyze` | **Starter** |
+| `POST` | `/v1/transactions/simulate` | **Starter** + quota mensal |
+| `POST` | `/v1/threats/check` | **Growth** |
+
+### Wallet risk
+
+```json
+{ "wallet": "0x...", "network": "ethereum" }
+```
+
+`network`: `ethereum` | `bnb` | `polygon` | `arbitrum`.
+
+### Contract risk
+
+```json
+{ "address": "0x...", "network": "ethereum" }
+```
+
+### Analyze transaction (Firewall)
+
+```json
+{
+  "chainId": 1,
+  "wallet": "0x...",
+  "to": "0x...",
+  "calldata": "0x095ea7b3...",
+  "value": "0"
+}
+```
+
+### Simulate
+
+```json
+{
+  "wallet": "0x...",
+  "network": "ethereum",
+  "tx": { "to": "0x...", "data": "0x...", "value": "0" }
+}
+```
+
+Quotas: Free 0 · Starter 100 · Growth 2 000 · Business 10 000 · Enterprise ilimitado.
+
+### Threats
+
+```json
+{ "address": "0x...", "domain": "exemplo-phishing.com" }
+```
+
+## Contrato da resposta
+
+```json
+{
+  "success": true,
+  "data": {
+    "riskScore": 0,
+    "riskLevel": "SAFE | CAUTION | HIGH | CRITICAL",
+    "decision": "ALLOW | REVIEW | BLOCK",
+    "reasons": ["frases humanas"],
+    "meta": {}
+  }
+}
+```
+
+Mapeamento típico: CRITICAL/HIGH → `BLOCK` · CAUTION/REVIEW → `REVIEW` · SAFE → `ALLOW`.
+
+## cURL
+
+```bash
+curl -X POST "https://api.nzochain.com/api/v1/transactions/analyze?lang=en" \
+  -H "Content-Type: application/json" \
+  -H "X-API-Key: pk_live_SUA_CHAVE" \
+  -d '{"chainId":1,"wallet":"0x...","to":"0x...","calldata":"0x...","value":"0"}'
+```
+
+Planos: [B2B](/pricing/enterprise) · Erros: [erros](/api/errors).
